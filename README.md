@@ -52,6 +52,32 @@ export const Head = () => (
 
 - [http://localhost:8000/\_\_\_graphql](http://localhost:8000/___graphql)
 
----
+**Test Query to see we are connected to Wordpress**
+
+```graphql
+query MyQuery{
+  allWpPage{
+    nodes{
+      title
+      blocks
+    }
+  }
+}
+```
+
+![Result of Query](./images/2023-10-11-14-01-48.png)
+
 
 ---
+---
+
+## Creating Pages:
+
+> In the root directory of our project we can create a `gatsby-node.js` file.
+
+- We can export a function that will create pages based on the pages in our Wordpress site.
+
+```js
+ exports.createPages = async ({ actions, graphql }) => {
+ };
+```
