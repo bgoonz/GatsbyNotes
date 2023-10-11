@@ -1,6 +1,5 @@
 # Gatsby (Wordpress as CMS)
 
-
 ## Getting Started:
 
 **Setup**
@@ -11,11 +10,9 @@
 
 > `npm install -g gatsby-cli`
 
-
 **Running the dev server**
 
 > `gatsby develop`
-
 
 #### Routes:
 
@@ -36,10 +33,25 @@ const IndexPage = () => {
 export default IndexPage;
 
 export const Head = () => <title>Home Page</title>;
-
 ```
+
 - In our version the h1 will not appear as large text because of the tailwind resets.
 
+- In each of our page components we can export a Head component that will be used to set the title of the page.
+
+```js
+export const Head = () => (
+  <>
+    <meta name="description" content="This is the test page" />
+    <title>This is the test Page</title>
+  </>
+);
+```
+
+**Graphql Interface can be found at:**
+
+- [http://localhost:8000/\_\_\_graphql](http://localhost:8000/___graphql)
 
 ---
+
 ---
