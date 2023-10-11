@@ -15,7 +15,7 @@ const Page = (props) => {
         siteDomain={process.env.GATSBY_WP_URL}
         customInternalLinkComponent={(
           { children, internalHref, className },
-          index
+          index,
         ) => {
           return (
             <Link to={internalHref} className={className} key={index}>

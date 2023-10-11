@@ -16,7 +16,7 @@ export const ContactForm7 = ({ formId, formMarkup }) => {
             {
               method: "POST",
               body: formData,
-            }
+            },
           ).then(() => {
             setHasSubmitted(true);
           });

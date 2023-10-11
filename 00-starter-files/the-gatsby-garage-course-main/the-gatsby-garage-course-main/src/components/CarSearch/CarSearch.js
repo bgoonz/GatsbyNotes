@@ -76,7 +76,7 @@ export const CarSearch = ({ style, className }) => {
         size: pageSize,
         offset: pageSize * (page - 1),
       },
-    }
+    },
   );
 
   const totalResults = data?.cars?.pageInfo?.offsetPagination?.total || 0;
