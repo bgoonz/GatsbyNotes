@@ -1,11 +1,12 @@
 import React from "react";
-function page() {
-    return (
-        <div>
-            This is a page template
-        </div>
-    )
+import { BlockRendererProvider } from "@webdeveducation/wp-block-tools";
+function page(props) {
+  console.log(props);
+  return (
+    <div>
+      <BlockRendererProvider allBlocks={props.pageContext.blocks} />
+    </div>
+  );
 }
 
-export default page
-
+export default page;
