@@ -18,23 +18,31 @@ function Page(props) {
           switch (block.name) {
             case "core/media-text":
               console.log("Render Component:", block);
-              const content = <BlockRenderer blocks={block.innerBlocks} />;
+              const content = (
+                <div
+                  className={`flex ${
+                    block.attributes.verticalAlignment === "center"
+                      ? "items-center"
+                      : ""
+                  } p-4`}
+                >
+                  <div>
+                    <BlockRenderer blocks={block.innerBlocks} />
+                  </div>
+                </div>
+              );
               return (
                 <div
                   key={block.id}
                   className={getClasses(block)}
                   style={getStyles(block)}
                 >
-                  {block.attributes.mediaPosition === "right" && (
-                    <div>{content}</div>
-                  )}
+                  {block.attributes.mediaPosition === "right" && content}
                   <div>
                     <GatsbyImage alt="" image={block.attributes.gatsbyImage} />
                   </div>
                   <div>
-                    {block.attributes.mediaPosition !== "right" && (
-                      <div>{content}</div>
-                    )}
+                    {block.attributes.mediaPosition !== "right" && content}
                   </div>
                 </div>
               );
