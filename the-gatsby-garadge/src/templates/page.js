@@ -18,9 +18,22 @@ function Page(props) {
 
           switch (block.name) {
             case "core/media-text":
+              const content = <BlockRenderer blocks={block.innerBlocks} />;
               return (
-                <div key={block.id} className={getClasses(block)} style={getStyles(block)}>
-                  <BlockRenderer blocks={block.innerBlocks} />
+                <div
+                  key={block.id}
+                  className={getClasses(block)}
+                  style={getStyles(block)}
+                >
+                  {block.attributes.mediaPosition === "right" && (
+                    <div>{content}</div>
+                  )}
+                  <div>This will be the image</div>
+                  <div>
+                    {block.attributes.mediaPosition !== "right" && (
+                      <div>{content}</div>
+                    )}
+                  </div>
                 </div>
               );
             default:
