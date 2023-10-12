@@ -55,9 +55,9 @@ export const Head = () => (
 **Test Query to see we are connected to Wordpress**
 
 ```graphql
-query MyQuery{
-  allWpPage{
-    nodes{
+query MyQuery {
+  allWpPage {
+    nodes {
       title
       blocks
     }
@@ -67,8 +67,8 @@ query MyQuery{
 
 ![Result of Query](./images/2023-10-11-14-01-48.png)
 
-
 ---
+
 ---
 
 ## Creating Pages:
@@ -78,12 +78,13 @@ query MyQuery{
 - We can export a function that will create pages based on the pages in our Wordpress site.
 
 ```js
- exports.createPages = async ({ actions, graphql }) => {
- };
+exports.createPages = async ({ actions, graphql }) => {};
 ```
 
 **Basic Usage**
->gatsby-node.js
+
+> gatsby-node.js
+
 ```js
 const path = require("path");
 
@@ -111,23 +112,18 @@ exports.createPages = async ({ actions, graphql }) => {
     });
   }
 };
-
 ```
 
->/templates/page.js
+> /templates/page.js
+
 ```js
 import React from "react";
 function page() {
-    return (
-        <div>
-            This is a page template
-        </div>
-    )
+  return <div>This is a page template</div>;
 }
 
-export default page
+export default page;
 ```
-
 
 #### Render Wordpress Blocks in Gatsby:
 
@@ -182,7 +178,36 @@ function Page(props) {
 export default Page;
 ```
 
-
 #### Using Gatsby Image:
 
+- The gatsby image plugin expects specific data to be passed into it for it to render correctly.
 
+**Setup for gatsby image in `gatsby-node.js`**
+
+```js
+for (let i = 0; i < data.allWpPage.nodes.length; i++) {
+  const page = data.allWpPage.nodes[i];
+  let blocks = page.blocks;
+  blocks = assignIds(blocks);
+  blocks = await assignGatsbyImage({
+    blocks,
+    graphql,
+    coreMediaText: true,
+  });
+  createPage({
+    path: page.uri,
+    component: pageTemplate,
+    context: {
+      blocks: blocks,
+    },
+  });
+}
+```
+
+> In `page.js`
+
+```js
+<div>
+  <GatsbyImage alt="" image={block.attributes.gatsbyImage} />
+</div>
+```

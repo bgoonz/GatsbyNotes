@@ -5,6 +5,7 @@ import {
   getStyles,
   getClasses,
 } from "@webdeveducation/wp-block-tools";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 function Page(props) {
   console.log(props);
@@ -14,10 +15,9 @@ function Page(props) {
       <BlockRendererProvider
         allBlocks={props.pageContext.blocks}
         renderComponent={(block) => {
-          console.log("Render Component:", block);
-
           switch (block.name) {
             case "core/media-text":
+              console.log("Render Component:", block);
               const content = <BlockRenderer blocks={block.innerBlocks} />;
               return (
                 <div
@@ -28,7 +28,9 @@ function Page(props) {
                   {block.attributes.mediaPosition === "right" && (
                     <div>{content}</div>
                   )}
-                  <div>This will be the image</div>
+                  <div>
+                    <GatsbyImage alt="" image={block.attributes.gatsbyImage} />
+                  </div>
                   <div>
                     {block.attributes.mediaPosition !== "right" && (
                       <div>{content}</div>
